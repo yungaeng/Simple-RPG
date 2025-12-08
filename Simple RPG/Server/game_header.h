@@ -4,18 +4,21 @@ constexpr short GAME_PORT = 3000;
 
 constexpr short MAX_CHAT_LENGTH = 255;
 
-constexpr int  MAX_USER = 500;
-constexpr int  NUM_MONSTER = 20000;
+constexpr int  MAX_USER = 5000;
+constexpr int  NUM_MONSTER = 200'000;
 
 constexpr char S2C_P_AVATAR_INFO = 1;
 constexpr char S2C_P_MOVE = 2;
 constexpr char S2C_P_ENTER = 3;
 constexpr char S2C_P_LEAVE = 4;
+
 constexpr char C2S_P_LOGIN = 5;
 constexpr char C2S_P_MOVE = 6;
+
 constexpr char S2C_P_CHAT = 7;
 constexpr char S2C_P_STAT_CHANGE = 8;
 constexpr char S2C_P_LOGIN_FAIL = 9;
+
 constexpr char C2S_P_ATTACK = 10;
 constexpr char C2S_P_CHAT = 11;
 constexpr char C2S_P_TELEPORT = 12;		// 동접 테스트 할 때
@@ -55,6 +58,7 @@ struct sc_packet_move {
 	char type;
 	long long id;
 	short x, y;
+	unsigned move_time;
 };
 
 struct sc_packet_enter {
@@ -111,6 +115,7 @@ struct cs_packet_move {
 	unsigned char  size;
 	char  type;
 	char  direction;
+	unsigned move_time;
 };
 
 struct cs_packet_attack {
