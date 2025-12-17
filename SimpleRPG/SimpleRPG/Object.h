@@ -3,10 +3,13 @@
 
 class Object
 {
-	float m_x;
-	float m_y;
-	int m_size = 10;
-	int m_speed = 20;
+	float m_x = 100;
+	float m_y = 100;
+	
+	int m_max_hp = 100;
+	int m_hp = 50;
+	int m_size = 40;
+	float m_speed = 300.f;
 
 	COLORREF m_color;
 	bool m_isalive = true;
@@ -28,5 +31,9 @@ public:
 	void SetDie() { m_isalive = false; };
 
 	bool CheckCollision(const Object& other) const;
+
+	void drawperson(HDC hdc, int centerX, int centerY);
+	void drawslime(HDC hdc, int centerX, int centerY);
+	void drawhpbar(HDC hdc, int centerX, int centerY);
 };
 

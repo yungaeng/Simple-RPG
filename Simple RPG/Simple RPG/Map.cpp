@@ -13,17 +13,17 @@ void Map::Setoffset(int x, int y)
      offsetY = y;
 }
 
-void Map::createobj(long long  id, short x, short y, char type, int hp, int maxhp, int exp, int level)
-{
-    objects.emplace(id, Object(id, x, y, type, hp, maxhp, exp, level));
-    if(myPlayerId == -1)
-        myPlayerId = id;
-}
-
-void Map::addobj(long long id, short x, short y, char type)
-{
-    objects.emplace(id, Object(id, x, y, type));
-}
+//void Map::createobj(long long  id, short x, short y, char type, int hp, int maxhp, int exp, int level)
+//{
+//    objects.emplace(id, Object(id, x, y, type, hp, maxhp, exp, level));
+//    if(myPlayerId == -1)
+//        myPlayerId = id;
+//}
+//
+//void Map::addobj(long long id, short x, short y, char type)
+//{
+//    objects.emplace(id, Object(id, x, y, type));
+//}
 
 void Map::deleteobj(long long id)
 {
@@ -34,10 +34,10 @@ void Map::stat_change(long long id, int hp, int maxhp, int exp, int level)
 {
     auto it = objects.find(id);
     if (it != objects.end()) {        
-        it->second.SetHp(hp);
+        /*it->second.SetHp(hp);
         it->second.SetMaxHp(maxhp);
         it->second.SetExp(exp);
-        it->second.SetLevel(level);
+        it->second.SetLevel(level);*/
     }
 }
 
@@ -64,10 +64,10 @@ void Map::moveobj(long long id, short x, short y)
         }
 
         // Update the piece's coordinates
-        it->second.SetX(x);
+       /* it->second.SetX(x);
         it->second.SetY(y);
 
-        it->second.SetDir(dir);
+        it->second.SetDir(dir);*/
     }
 }
 
@@ -215,9 +215,9 @@ void Map::DrawMapAndObj(HDC hdc) {
 
     // 피스 그리기
     for (auto p : objects) {
-        if (p.second.GetX() >= startCol && p.second.GetX() <= endCol &&
-            p.second.GetY() >= startRow && p.second.GetY() <= endRow)
-            p.second.draw(hdc, offsetX, offsetY);
+        //if (p.second.GetX() >= startCol && p.second.GetX() <= endCol &&
+        //    p.second.GetY() >= startRow && p.second.GetY() <= endRow)
+        //    /*p.second.draw(hdc, offsetX, offsetY);*/
     }
 }
 
@@ -233,7 +233,7 @@ void Map::DrawUI(HDC hdc) {
         TextOut(hdc, 10, currentY, ssCoord.str().c_str(), ssCoord.str().length());
         currentY += lineHeight;
 
-        std::wstringstream ssLevel;
+        /*std::wstringstream ssLevel;
         ssLevel << L"Level : " << objects[myPlayerId].GetLevel();
         TextOut(hdc, 10, currentY, ssLevel.str().c_str(), ssLevel.str().length());
         currentY += lineHeight;
@@ -245,7 +245,7 @@ void Map::DrawUI(HDC hdc) {
 
         std::wstringstream ssHp;
         ssHp << L"(" << objects[0].GetHp() << L"/" << objects[myPlayerId].GetMaxHp() << L")";
-        TextOut(hdc, 10, currentY, ssHp.str().c_str(), ssHp.str().length());
+        TextOut(hdc, 10, currentY, ssHp.str().c_str(), ssHp.str().length());*/
     }
     else {
         std::wstring noDataText = L"(N/A)";

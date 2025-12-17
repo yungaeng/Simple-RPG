@@ -14,57 +14,54 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="소스 파일\Game">
-      <UniqueIdentifier>{bc7858c0-e879-42d7-9e89-48555dd5c818}</UniqueIdentifier>
+      <UniqueIdentifier>{f49d704a-bcda-4a37-91d0-892ae88fba64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Game\Map">
-      <UniqueIdentifier>{38b22792-86c6-44bc-875e-2e327d6ed224}</UniqueIdentifier>
+    <Filter Include="소스 파일\World">
+      <UniqueIdentifier>{f292d21b-c4c2-4985-b6ed-234fccb31b47}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Game\Obj">
-      <UniqueIdentifier>{f9b26797-ec74-48ca-9e66-e1e553d58fcb}</UniqueIdentifier>
+    <Filter Include="소스 파일\Object">
+      <UniqueIdentifier>{e0f8a1d9-21fc-4e46-b020-b1c0c7510a37}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Game\Obj\Object">
-      <UniqueIdentifier>{6ef5d6a0-4cd1-4b14-9ea5-e569d70bb5f4}</UniqueIdentifier>
+    <Filter Include="소스 파일\Manager">
+      <UniqueIdentifier>{aa32320d-a997-4920-970c-9ca3872ea612}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ClientMain.cpp">
+    <ClCompile Include="SimpleRPG.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>소스 파일\Game\Obj\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="SnakeGame.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>소스 파일\Game\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjManager.cpp">
-      <Filter>소스 파일\Game\Obj</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>소스 파일\Game</Filter>
     </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>소스 파일\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Object.h">
-      <Filter>소스 파일\Game\Obj\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>소스 파일\Game\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjManager.h">
-      <Filter>소스 파일\Game\Obj</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>소스 파일\Game</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>리소스 파일</Filter>
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>소스 파일\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>소스 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjManager.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="resource.rc">
+    <ResourceCompile Include="SimpleRPG.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>

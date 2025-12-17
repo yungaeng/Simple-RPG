@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include "../Server/game_header.h"
-constexpr unsigned short BlockSize = PieceSize * 2;
+constexpr unsigned short BlockSize = 20 * 2;
 constexpr int SCREEN_WIDTH = 660;
 constexpr int SCREEN_HEIGHT = 600;
 
