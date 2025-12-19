@@ -19,11 +19,15 @@ class World
 {
 	TileType _mapTiles[MAP_HEIGHT][MAP_WIDTH];
 
-	int offsetX;
-	int offsetY;
+	float offsetX;
+	float offsetY;
 public:
 	void Init();
 	void Draw(HDC hdc);
 	void End();
+
+	void UpdateOffset(float objX, float objY);
+	float GetOffsetX() { return offsetX; };
+	float GetOffsetY() { return offsetY; };
 };
 

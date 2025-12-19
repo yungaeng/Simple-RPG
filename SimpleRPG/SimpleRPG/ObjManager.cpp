@@ -1,32 +1,8 @@
 #include "ObjManager.h"
 
-void ObjManager::MoveObj(char dir)
+void ObjManager::Draw(HDC hdc, float offsetX, float offsetY)
 {
-	float x = obj.GetX();
-	float y = obj.GetY();
-	float speed = obj.GetSpeed();
-	switch (dir)
-	{
-	case 'W':
-		obj.SetPos(x, y - speed);
-		break;
-	case 'A':
-		obj.SetPos(x - speed, y);
-		break;
-	case 'S':
-		obj.SetPos(x, y + speed);
-		break;
-	case 'D':
-		obj.SetPos(x + speed, y);
-		break;
-	default:
-		break;
-	}
-}
-
-void ObjManager::Draw(HDC hdc)
-{
-	obj.Draw(hdc);
+	obj.Draw(hdc, offsetX, offsetY);
 }
 
 void ObjManager::Update(float deltaTime)

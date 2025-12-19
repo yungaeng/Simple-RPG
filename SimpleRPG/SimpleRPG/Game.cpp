@@ -11,7 +11,9 @@ void Game::Init()
 void Game::Draw(HDC hdc)
 {
 	world.Draw(hdc);
-	obj.Draw(hdc);
+
+	// 캐릭터 그리기: world가 계산한 카메라 오프셋 값을 가져와서 전달해야 합니다.
+	obj.Draw(hdc, world.GetOffsetX(), world.GetOffsetY());
 }
 
 void Game::Input(WPARAM wParam, LPARAM lParam)
@@ -43,6 +45,11 @@ void Game::Update()
 
 	// 4. 오브젝트 업데이트
 	obj.Update(deltaTime);
+
+	// 5. 오브젝트의 현재 위치를 가져와서 맵의 오프셋 갱신
+	// ObjManager나 Object 클래스에 위치 반환 함수가 있다고 가정합니다.
+	obj.GetOffset(&playerX, &playerY);
+	world.UpdateOffset(playerX, playerY);
 }
 
 void Game::End()

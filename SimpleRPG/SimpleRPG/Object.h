@@ -8,8 +8,8 @@ class Object
 	
 	int m_max_hp = 100;
 	int m_hp = 50;
-	int m_size = 40;
-	float m_speed = 300.f;
+	float m_size = 40;
+	float m_speed = 200.f;
 
 	COLORREF m_color;
 	bool m_isalive = true;
@@ -17,12 +17,12 @@ public:
 	Object() {};
 	Object(float x, float y, COLORREF c);
 
-	void Draw(HDC hdc);
+	void Draw(HDC hdc, float offsetX, float offsetY);
 
 	float GetX() const { return m_x; };
 	float GetY() const { return m_y; };
-	int GetSpeed() const { return m_speed; };
-	int GetSize() const { return m_size; };
+	float GetSpeed() const { return m_speed; };
+	float GetSize() const { return m_size; };
 	COLORREF GetColor() { return m_color; };
 
 	void SetAlive(bool alive) { m_isalive = alive; }

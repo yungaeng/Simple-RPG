@@ -57,6 +57,7 @@ void World::Draw(HDC hdc)
     HBRUSH blackLineBrush = CreateSolidBrush(RGB(0, 0, 0));
 
     // 화면에 보이는 맵의 시작/끝 타일 좌표 계산
+    // 화면에 보이는 곳(WINDOW_WIDTH와 WINDOW_HEIGHT 내에 들어오는 타일만)만 그리는 핵심 로직
     int startCol = max(0, (-offsetX) / BlockSize);
     int endCol = min(MAP_WIDTH - 1, (WINDOW_WIDTH - offsetX) / BlockSize);
     int startRow = max(0, (-offsetY) / BlockSize);
@@ -97,7 +98,7 @@ void World::Draw(HDC hdc)
     DeleteObject(lightBrownBrush);
 
     // 격자선 그리기 (기존 코드와 동일)
-    int lineThickness = 2;
+    float lineThickness = 1.5f;
 
     // 수직선 그리기
     for (int col = startCol; col <= endCol; col++) {
@@ -127,4 +128,23 @@ void World::Draw(HDC hdc)
 void World::End()
 {
 
+}
+
+void World::UpdateOffset(float objX, float objY)
+{
+    // 오브젝트가 화면 중앙에 오도록 오프셋 설정
+    // 공식: -(오브젝트 좌표) + (화면 크기의 절반)
+    offsetX = -objX + (WINDOW_WIDTH / 2);
+    offsetY = -objY + (WINDOW_HEIGHT / 2);
+
+    // [선택 사항] 맵의 경계를 벗어나지 않게 제한하고 싶다면 아래 코드 추가
+    float maxOffsetX = 0;
+    float minOffsetX = -(MAP_WIDTH * BlockSize - WINDOW_WIDTH);
+    float maxOffsetY = 0;
+    float minOffsetY = -(MAP_HEIGHT * BlockSize - WINDOW_HEIGHT);
+
+    if (offsetX > maxOffsetX) offsetX = maxOffsetX;
+    if (offsetX < minOffsetX) offsetX = minOffsetX;
+    if (offsetY > maxOffsetY) offsetY = maxOffsetY;
+    if (offsetY < minOffsetY) offsetY = minOffsetY;
 }

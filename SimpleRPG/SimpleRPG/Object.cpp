@@ -9,14 +9,19 @@ Object::Object(float x, float y, COLORREF c)
 
     m_isalive = true;
     m_size = 10;
-    m_speed = 300.f;
+    m_speed = 200.f;
 }
 
-void Object::Draw(HDC hdc)
+void Object::Draw(HDC hdc, float offsetX, float offsetY)
 {
+    // 화면상의 좌표 = 실제 좌표 + 오프셋
+    float screenX = m_x + offsetX;
+    float screenY = m_y + offsetY;
+
     if (m_isalive) {
-        drawperson(hdc, m_x, m_y);
-        drawhpbar(hdc, m_x, m_y);
+        // 중요: m_x, m_y 대신 계산된 screenX, screenY를 전달해야 합니다!
+        drawperson(hdc, (int)screenX, (int)screenY);
+        drawhpbar(hdc, (int)screenX, (int)screenY);
     }
 }
 

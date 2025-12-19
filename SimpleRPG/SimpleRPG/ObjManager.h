@@ -6,8 +6,9 @@ class ObjManager
 {
 	Object obj;
 public:
-	void MoveObj(char dir);
 	void Update(float deltaTime);
-	void Draw(HDC hdc);
+	void Draw(HDC hdc, float offsetX, float offsetY);
+
+	void GetOffset(float* x, float* y) { *x = obj.GetX(); *y = obj.GetY();}
 };
 
