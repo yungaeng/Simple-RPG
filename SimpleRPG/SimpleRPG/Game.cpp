@@ -48,6 +48,7 @@ void Game::Update()
 
 	// 5. 오브젝트의 현재 위치를 가져와서 맵의 오프셋 갱신
 	// ObjManager나 Object 클래스에 위치 반환 함수가 있다고 가정합니다.
+	float playerX, playerY;
 	obj.GetOffset(&playerX, &playerY);
 	world.UpdateOffset(playerX, playerY);
 }

@@ -7,26 +7,65 @@ void ObjManager::Draw(HDC hdc, float offsetX, float offsetY)
 
 void ObjManager::Update(float deltaTime)
 {
-	float speed = obj.GetSpeed(); // 예: 300.0f (픽셀/초)
-	float vx = 0, vy = 0;
+    float baseSpeed = 200.0f;    // 기본 걷기 속도
+    float maxSpeed = 500.0f;     // 최대 달리기 속도
+    float acceleration = 400.0f; // 초당 증가할 속도 수치
 
-	// GetKeyState를 사용하여 여러 키가 동시에 눌린 것을 확인
-	if (GetKeyState('W') & 0x8000) vy -= 1.0f;
-	if (GetKeyState('S') & 0x8000) vy += 1.0f;
-	if (GetKeyState('A') & 0x8000) vx -= 1.0f;
-	if (GetKeyState('D') & 0x8000) vx += 1.0f;
+    // 현재 오브젝트의 속도를 가져옵니다. 
+    // (Object 클래스에 m_currentSpeed 멤버 변수가 있다고 가정)
+    float currentSpeed = obj.GetCurrentSpeed();
 
-	if (vx != 0 || vy != 0)
-	{
-		// 대각선 이동 속도 보정 (정규화)
-		float length = sqrtf(vx * vx + vy * vy);
-		vx /= length;
-		vy /= length;
+    float vx = 0, vy = 0;
+    bool isMoving = false;
 
-		// 결과 반영: 좌표 + (방향 * 속도 * 시간)
-		float nextX = obj.GetX() + (vx * speed * deltaTime);
-		float nextY = obj.GetY() + (vy * speed * deltaTime);
+    // 1. 방향 입력 확인
+    if (GetKeyState('W') & 0x8000) vy -= 1.0f;
+    if (GetKeyState('S') & 0x8000) vy += 1.0f;
+    if (GetKeyState('A') & 0x8000) vx -= 1.0f;
+    if (GetKeyState('D') & 0x8000) vx += 1.0f;
 
-		obj.SetPos(nextX, nextY);
-	}
+    if (vx != 0 || vy != 0) isMoving = true;
+
+    // 2. Shift 키 입력에 따른 속도 제어
+    if (isMoving)
+    {
+        if (GetKeyState(VK_LSHIFT) & 0x8000) // 왼쪽 Shift 누름
+        {
+            currentSpeed += acceleration * deltaTime; // 가속
+            if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+        }
+        else // Shift 뗌
+        {
+            if (currentSpeed > baseSpeed)
+            {
+                currentSpeed -= acceleration * deltaTime; // 감속
+                if (currentSpeed < baseSpeed) currentSpeed = baseSpeed;
+            }
+            else
+            {
+                currentSpeed = baseSpeed;
+            }
+        }
+    }
+    else
+    {
+        currentSpeed = 0; // 이동하지 않으면 속도 0
+    }
+
+    // 3. 실제 이동 처리
+    if (isMoving)
+    {
+        // 대각선 정규화
+        float length = sqrtf(vx * vx + vy * vy);
+        vx /= length;
+        vy /= length;
+
+        float nextX = obj.GetX() + (vx * currentSpeed * deltaTime);
+        float nextY = obj.GetY() + (vy * currentSpeed * deltaTime);
+
+        obj.SetPos(nextX, nextY);
+    }
+
+    // 4. 변화된 현재 속도를 오브젝트에 다시 저장
+    obj.SetcurrentSpeed(currentSpeed);
 }

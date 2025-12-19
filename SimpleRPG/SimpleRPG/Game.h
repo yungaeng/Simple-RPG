@@ -16,7 +16,7 @@ class Game
     World world;
     ObjManager obj;
     std::chrono::time_point<std::chrono::steady_clock> m_timer;
-    float playerX, playerY;
+   
 public:
     void Init();
     void Draw(HDC hdc);

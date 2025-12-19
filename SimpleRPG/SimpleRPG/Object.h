@@ -10,6 +10,7 @@ class Object
 	int m_hp = 50;
 	float m_size = 40;
 	float m_speed = 200.f;
+	float m_currentSpeed= 0.f;
 
 	COLORREF m_color;
 	bool m_isalive = true;
@@ -24,12 +25,13 @@ public:
 	float GetSpeed() const { return m_speed; };
 	float GetSize() const { return m_size; };
 	COLORREF GetColor() { return m_color; };
+	float GetCurrentSpeed() { return m_currentSpeed; };
 
 	void SetAlive(bool alive) { m_isalive = alive; }
 	void SetPos(float x, float y) { m_x = x, m_y = y; };
 	void SetColor(COLORREF color) { m_color = color; };
 	void SetDie() { m_isalive = false; };
-
+	void SetcurrentSpeed(float speed) { m_currentSpeed = speed; };
 	bool CheckCollision(const Object& other) const;
 
 	void drawperson(HDC hdc, int centerX, int centerY);
