@@ -3,20 +3,18 @@
 
 class Object
 {
-	float m_x = 100;
-	float m_y = 100;
-	
 	int m_max_hp = 100;
 	int m_hp = 50;
-	float m_size = 40;
 	float m_speed = 200.f;
 	float m_currentSpeed= 0.f;
+public:
+	float m_x = 100;
+	float m_y = 100;
+	float m_size = 40;
 
-	COLORREF m_color;
-	bool m_isalive = true;
 public:
 	Object() {};
-	Object(float x, float y, COLORREF c);
+	Object(float x, float y);
 
 	void Draw(HDC hdc, float offsetX, float offsetY);
 
@@ -24,18 +22,13 @@ public:
 	float GetY() const { return m_y; };
 	float GetSpeed() const { return m_speed; };
 	float GetSize() const { return m_size; };
-	COLORREF GetColor() { return m_color; };
 	float GetCurrentSpeed() { return m_currentSpeed; };
 
-	void SetAlive(bool alive) { m_isalive = alive; }
 	void SetPos(float x, float y) { m_x = x, m_y = y; };
-	void SetColor(COLORREF color) { m_color = color; };
-	void SetDie() { m_isalive = false; };
 	void SetcurrentSpeed(float speed) { m_currentSpeed = speed; };
 	bool CheckCollision(const Object& other) const;
 
-	void drawperson(HDC hdc, int centerX, int centerY);
-	void drawslime(HDC hdc, int centerX, int centerY);
-	void drawhpbar(HDC hdc, int centerX, int centerY);
+private:
+	void DrawHp(HDC hdc, float centerX, float centerY);
 };
 

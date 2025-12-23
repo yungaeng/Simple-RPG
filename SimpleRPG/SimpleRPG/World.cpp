@@ -98,31 +98,31 @@ void World::Draw(HDC hdc)
     DeleteObject(lightBrownBrush);
 
     // 격자선 그리기 (기존 코드와 동일)
-    float lineThickness = 1.5f;
+    //float lineThickness = 0.f;
 
-    // 수직선 그리기
-    for (int col = startCol; col <= endCol; col++) {
-        RECT lineRect = {
-            offsetX + col * BlockSize - lineThickness / 2,
-            offsetY + startRow * BlockSize,
-            offsetX + col * BlockSize + lineThickness / 2,
-            offsetY + (endRow + 1) * BlockSize
-        };
-        FillRect(hdc, &lineRect, blackLineBrush);
-    }
+    //// 수직선 그리기
+    //for (int col = startCol; col <= endCol; col++) {
+    //    RECT lineRect = {
+    //        offsetX + col * BlockSize - lineThickness / 2,
+    //        offsetY + startRow * BlockSize,
+    //        offsetX + col * BlockSize + lineThickness / 2,
+    //        offsetY + (endRow + 1) * BlockSize
+    //    };
+    //    FillRect(hdc, &lineRect, blackLineBrush);
+    //}
 
-    // 수평선 그리기
-    for (int row = startRow; row <= endRow; row++) {
-        RECT lineRect = {
-            offsetX + startCol * BlockSize,
-            offsetY + row * BlockSize - lineThickness / 2,
-            offsetX + (endCol + 1) * BlockSize,
-            offsetY + row * BlockSize + lineThickness / 2
-        };
-        FillRect(hdc, &lineRect, blackLineBrush);
-    }
+    //// 수평선 그리기
+    //for (int row = startRow; row <= endRow; row++) {
+    //    RECT lineRect = {
+    //        offsetX + startCol * BlockSize,
+    //        offsetY + row * BlockSize - lineThickness / 2,
+    //        offsetX + (endCol + 1) * BlockSize,
+    //        offsetY + row * BlockSize + lineThickness / 2
+    //    };
+    //    FillRect(hdc, &lineRect, blackLineBrush);
+    //}
 
-    DeleteObject(blackLineBrush);
+    //DeleteObject(blackLineBrush);
 }
 
 void World::End()

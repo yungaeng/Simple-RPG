@@ -1,14 +1,14 @@
 #pragma once
-#include "Object.h"
+#include "Character.h"
 #include <cmath>
 
 class ObjManager
 {
-	Object obj;
+	Character character;
 public:
 	void Update(float deltaTime);
 	void Draw(HDC hdc, float offsetX, float offsetY);
 
-	void GetOffset(float* x, float* y) { *x = obj.GetX(); *y = obj.GetY();}
+	void GetOffset(float* x, float* y) { *x = character.GetX(); *y = character.GetY();}
 };
 

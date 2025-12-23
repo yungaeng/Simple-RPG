@@ -1,28 +1,18 @@
 #include "Object.h"
 #include "Object.h"
 
-Object::Object(float x, float y, COLORREF c)
+Object::Object(float x, float y)
 {
     m_x = x;
     m_y = y;
-    m_color = c;
 
-    m_isalive = true;
     m_size = 10;
     m_speed = 200.f;
 }
 
 void Object::Draw(HDC hdc, float offsetX, float offsetY)
 {
-    // 화면상의 좌표 = 실제 좌표 + 오프셋
-    float screenX = m_x + offsetX;
-    float screenY = m_y + offsetY;
-
-    if (m_isalive) {
-        // 중요: m_x, m_y 대신 계산된 screenX, screenY를 전달해야 합니다!
-        drawperson(hdc, (int)screenX, (int)screenY);
-        drawhpbar(hdc, (int)screenX, (int)screenY);
-    }
+    DrawHp(hdc, offsetX, offsetY);
 }
 
 bool Object::CheckCollision(const Object& other) const
@@ -45,47 +35,17 @@ bool Object::CheckCollision(const Object& other) const
     return true;
 }
 
-void Object::drawperson(HDC hdc, int centerX, int centerY) {
-    int headRadius = m_size / 4;
-    Ellipse(hdc, centerX - headRadius, centerY - m_size / 2, centerX + headRadius, centerY - m_size / 2 + headRadius * 2);
-    MoveToEx(hdc, centerX, centerY - m_size / 2 + headRadius * 2, NULL);
-    LineTo(hdc, centerX, centerY + m_size / 4);
-    MoveToEx(hdc, centerX, centerY - m_size / 2 + headRadius * 2 + m_size / 8, NULL);
-    LineTo(hdc, centerX - m_size / 4, centerY + m_size / 8);
-    MoveToEx(hdc, centerX, centerY - m_size / 2 + headRadius * 2 + m_size / 8, NULL);
-    LineTo(hdc, centerX + m_size / 4, centerY + m_size / 8);
-    MoveToEx(hdc, centerX, centerY + m_size / 4, NULL);
-    LineTo(hdc, centerX - m_size / 6, centerY + m_size / 2);
-    MoveToEx(hdc, centerX, centerY + m_size / 4, NULL);
-    LineTo(hdc, centerX + m_size / 6, centerY + m_size / 2);
-}
-
-void Object::drawslime(HDC hdc, int centerX, int centerY)
-{
-    int slimeWidth = m_size * 3 / 4;
-    int slimeHeight = m_size * 2 / 3;
-    Ellipse(hdc, centerX - slimeWidth / 2, centerY - slimeHeight / 2,
-        centerX + slimeWidth / 2, centerY + slimeHeight / 2);
-    int eyeRadius = m_size / 12;
-    int eyeOffsetY = m_size / 8;
-    int eyeOffsetX = m_size / 6;
-    Ellipse(hdc, centerX - eyeOffsetX - eyeRadius, centerY - eyeOffsetY - eyeRadius,
-        centerX - eyeOffsetX + eyeRadius, centerY - eyeOffsetY + eyeRadius);
-    Ellipse(hdc, centerX + eyeOffsetX - eyeRadius, centerY - eyeOffsetY - eyeRadius,
-        centerX + eyeOffsetX + eyeRadius, centerY - eyeOffsetY + eyeRadius);
-}
-
-void Object::drawhpbar(HDC hdc, int centerX, int centerY)
+void Object::DrawHp(HDC hdc, float centerX, float centerY)
 {
     if (m_max_hp > 0)
     {
-        int barWidth = m_size;
-        int barHeight = 5;
+        float barWidth = m_size;
+        float barHeight = 5;
 
-        int barTop = centerY - m_size / 2 - barHeight - 5;
-        int barLeft = centerX - barWidth / 2;
-        int barRight = centerX + barWidth / 2;
-        int barBottom = barTop + barHeight;
+        float barTop = centerY - m_size / 2 - barHeight - 5;
+        float barLeft = centerX - barWidth / 2;
+        float barRight = centerX + barWidth / 2;
+        float barBottom = barTop + barHeight;
 
         RECT bgRect = { barLeft, barTop, barRight, barBottom };
         HBRUSH bgBrush = CreateSolidBrush(RGB(50, 50, 50));

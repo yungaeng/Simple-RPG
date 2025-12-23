@@ -2,7 +2,7 @@
 
 void ObjManager::Draw(HDC hdc, float offsetX, float offsetY)
 {
-	obj.Draw(hdc, offsetX, offsetY);
+    character.Draw(hdc, offsetX, offsetY);
 }
 
 void ObjManager::Update(float deltaTime)
@@ -13,7 +13,7 @@ void ObjManager::Update(float deltaTime)
 
     // 현재 오브젝트의 속도를 가져옵니다. 
     // (Object 클래스에 m_currentSpeed 멤버 변수가 있다고 가정)
-    float currentSpeed = obj.GetCurrentSpeed();
+    float currentSpeed = character.GetCurrentSpeed();
 
     float vx = 0, vy = 0;
     bool isMoving = false;
@@ -27,45 +27,41 @@ void ObjManager::Update(float deltaTime)
     if (vx != 0 || vy != 0) isMoving = true;
 
     // 2. Shift 키 입력에 따른 속도 제어
-    if (isMoving)
-    {
-        if (GetKeyState(VK_LSHIFT) & 0x8000) // 왼쪽 Shift 누름
+    if (isMoving) {
+        if (GetKeyState(VK_LSHIFT) & 0x8000 || GetKeyState(VK_RSHIFT) & 0x8000) // 왼쪽 Shift 누름
         {
             currentSpeed += acceleration * deltaTime; // 가속
-            if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+            if (currentSpeed > maxSpeed)
+                currentSpeed = maxSpeed;
         }
         else // Shift 뗌
         {
             if (currentSpeed > baseSpeed)
             {
                 currentSpeed -= acceleration * deltaTime; // 감속
-                if (currentSpeed < baseSpeed) currentSpeed = baseSpeed;
+                if (currentSpeed < baseSpeed)
+                    currentSpeed = baseSpeed;
             }
             else
-            {
                 currentSpeed = baseSpeed;
-            }
         }
     }
     else
-    {
         currentSpeed = 0; // 이동하지 않으면 속도 0
-    }
 
     // 3. 실제 이동 처리
-    if (isMoving)
-    {
+    if (isMoving) {
         // 대각선 정규화
         float length = sqrtf(vx * vx + vy * vy);
         vx /= length;
         vy /= length;
 
-        float nextX = obj.GetX() + (vx * currentSpeed * deltaTime);
-        float nextY = obj.GetY() + (vy * currentSpeed * deltaTime);
+        float nextX = character.GetX() + (vx * currentSpeed * deltaTime);
+        float nextY = character.GetY() + (vy * currentSpeed * deltaTime);
 
-        obj.SetPos(nextX, nextY);
+        character.SetPos(nextX, nextY);
     }
 
     // 4. 변화된 현재 속도를 오브젝트에 다시 저장
-    obj.SetcurrentSpeed(currentSpeed);
+    character.SetcurrentSpeed(currentSpeed);
 }
